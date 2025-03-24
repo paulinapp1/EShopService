@@ -1,4 +1,5 @@
 ﻿using Eshop.Application;
+using EShop.Domain.Enums;
 using EShop.Domain.Exceptions.CardNumber;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,8 +24,16 @@ namespace EShopService.Controllers
             try
             {
                 bool isValid = creditCardService.ValidateCard(cardNumber);
+
                 string cardType = creditCardService.GetCardType(cardNumber);
-                return Ok(new { IsValid = isValid, CardType = cardType });
+                if (Enum.TryParse<CreditCardProvider>(cardType, true, out _))
+                {
+                    return Ok(new { IsValid = isValid, CardType = cardType });
+                }
+                else
+                {
+                    return StatusCode(406, new { Error = "Card type not supported" });
+                }
             }
             catch (CardNumberTooShortException ex)
             {
@@ -35,7 +44,7 @@ namespace EShopService.Controllers
                 return NotFound(new { Error = ex.Message });
             }
             catch (CardNumberInvalidException ex) {
-                return StatusCode(406, new { Error = ex.Message });
+                return StatusCode(400, new { Error = ex.Message });
             }
         }
 
