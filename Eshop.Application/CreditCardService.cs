@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Eshop.Application
 {
-    public class CreditCardService
+    public class CreditCardService : ICreditCardService
     {
         public string GetCardType(string cardNumber, string expectedCardType = null)
         {
