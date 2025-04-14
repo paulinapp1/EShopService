@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Domain", "EShop.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShop.Domain.Tests", "EShop.Domain.Tests\EShop.Domain.Tests.csproj", "{3BA62112-CBD7-4D9F-896E-66AF0C7B5094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EShopService.Tests", "EShopService.Tests\EShopService.Tests.csproj", "{D194033A-0B76-470B-BA3B-65E702F64F29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EShopService.IntegrationTests", "EShopService.Tests\EShopService.IntegrationTests.csproj", "{D194033A-0B76-470B-BA3B-65E702F64F29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
