@@ -1,43 +1,27 @@
-﻿using EShop.Domain.Exceptions.CardNumber;
+﻿using EShop.Domain.Enums;
+using EShop.Domain.Exceptions.CardNumber;
 using System.Text.RegularExpressions;
 
 namespace Eshop.Application
 {
     public class CreditCardService : ICreditCardService
     {
-        public string GetCardType(string cardNumber, string expectedCardType = null)
+        public CreditCardProvider GetCardType(string cardNumber)
         {
             cardNumber = cardNumber.Replace(" ", "").Replace("-", "");
 
-            string actualCardType;
-
             if (Regex.IsMatch(cardNumber, @"^4(\d{12}|\d{15}|\d{18})$"))
-                actualCardType = "Visa";
-            else if (Regex.IsMatch(cardNumber, @"^(5[1-5]\d{14}|2(2[2-9][1-9]|2[3-9]\d{2}|[3-6]\d{3}|7([01]\d{2}|20\d))\d{10})$"))
-                actualCardType = "MasterCard";
-            else if (Regex.IsMatch(cardNumber, @"^3[47]\d{13}$"))
-                actualCardType = "American Express";
-            else if (Regex.IsMatch(cardNumber, @"^(6011\d{12}|65\d{14}|64[4-9]\d{13}|622(1[2-9][6-9]|[2-8]\d{2}|9([01]\d|2[0-5]))\d{10})$"))
-                actualCardType = "Discover";
-            else if (Regex.IsMatch(cardNumber, @"^(352[89]|35[3-8]\d)\d{12}$"))
-                actualCardType = "JCB";
-            else if (Regex.IsMatch(cardNumber, @"^3(0[0-5]|[68]\d)\d{11}$"))
-                actualCardType = "Diners Club";
-            else if (Regex.IsMatch(cardNumber, @"^(50|5[6-9]|6\d)\d{10,17}$"))
-                actualCardType = "Maestro";
-            else
-            {
-                throw new CardNumberInvalidException();
-            }
+                return CreditCardProvider.Visa;
 
-            // If expected type is provided and doesn't match, throw exception
-            if (expectedCardType != null && actualCardType != expectedCardType)
-            {
-                throw new CardNumberInvalidException();
-            }
+            if (Regex.IsMatch(cardNumber, @"^(5[1-5]\d{14}|2(2[2-9][1-9]|2[3-9]\d{2}|[3-6]\d{3}|7([01]\d{2}|20\d))\d{10})$"))
+                return CreditCardProvider.Mastercard;
 
-            return actualCardType;
+            if (Regex.IsMatch(cardNumber, @"^3[47]\d{13}$"))
+                return CreditCardProvider.AmericanExpress;
+
+            throw new CardNumberInvalidException("Invalid card number");
         }
+
 
         public bool ValidateCard(string cardNumber)
         {
@@ -78,6 +62,7 @@ namespace Eshop.Application
 
             return (sum % 10 == 0);
         }
-      
+
+        
     }
 }

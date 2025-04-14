@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EShop.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Eshop.Application
 {
     public interface ICreditCardService
     {
-        public string GetCardType(string cardNumber, string expectedCardType=null);
+        public CreditCardProvider GetCardType(string cardNumber);
         public bool ValidateCard(string cardNumber);
     }
 }

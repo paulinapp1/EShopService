@@ -33,7 +33,7 @@ namespace EShop.Domain.Repositories
             return false;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             return _context.Products.ToList();
         }

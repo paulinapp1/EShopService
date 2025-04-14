@@ -20,7 +20,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddScoped<IESeeder, EShopSeeder>();
 
-
+builder.Services.AddControllers();
 
 
 var app = builder.Build();
@@ -41,3 +41,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+public partial class Program { }

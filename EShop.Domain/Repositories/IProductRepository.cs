@@ -9,7 +9,7 @@ namespace EShop.Domain.Repositories
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetAllProducts();
+        List<Product> GetAllProducts();
         Product GetProductById(int id);
         void AddProduct(Product product);
         void UpdateProduct(Product product);
